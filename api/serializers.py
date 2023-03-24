@@ -6,7 +6,7 @@ from api.models import Equipment, Feedback
 class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipment
-        fields = ['photo', 'title', 'quantity', 'price']
+        fields = ['photo', 'title', 'description', 'quantity', 'price']
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

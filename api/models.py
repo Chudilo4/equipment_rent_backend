@@ -7,6 +7,8 @@ class Equipment(models.Model):
                               blank=False, verbose_name='Фото оборудования')
     title = models.CharField(max_length=255, blank=False,
                              null=False, verbose_name='Название оборудования')
+    description = models.TextField(null=False, blank=False,
+                                   verbose_name='Описание')
     quantity = models.IntegerField(verbose_name='Кол-во',
                                    validators=[MinValueValidator(1)],
                                    default=1, blank=False, null=False)

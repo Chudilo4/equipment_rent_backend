@@ -16,6 +16,6 @@ class FeedbackSerializer(serializers.ModelSerializer):
     text = serializers.CharField(allow_blank=False, allow_null=False)
 
     class Meta:
-        model = Equipment
+        model = Feedback
         fields = ['fio', 'phone_number', 'email', 'text']
 

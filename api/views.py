@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from api.models import Equipment
 from api.serializers import EquipmentSerializer, FeedbackSerializer
 from rest_framework.response import Response
-import requests
 
 
 # Create your views here.
@@ -18,7 +17,6 @@ class EquipmentAPIView(APIView):
 class FeedbackAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
-        print(requests.post('https://api.telegram.org/bot5818251636:AAFIOC9Q3u3Q7cfMms0KqWcuhWXZUZTibE8/getCommand=timer'))
         serializer = FeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

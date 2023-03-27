@@ -22,6 +22,7 @@ class FeedbackSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     equipment_set = EquipmentSerializer(many=True)
+
     class Meta:
         model = CategoryEquipment
         fields = ['id', 'title', 'equipment_set']

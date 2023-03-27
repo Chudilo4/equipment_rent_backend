@@ -21,7 +21,7 @@ class Equipment(models.Model):
                                 validators=[MinValueValidator(1)],
                                 default=1, blank=False, null=False)
     category = models.ForeignKey(CategoryEquipment, verbose_name='Категория',
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE, default=None)
     created_time = models.DateTimeField(auto_now_add=True,
                                         verbose_name='Время создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Время обновления')

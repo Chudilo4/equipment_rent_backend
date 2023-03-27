@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import Equipment, Feedback
+from api.models import Equipment, Feedback, CategoryEquipment
 
 
 @admin.register(Equipment)
@@ -15,3 +15,8 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['id', 'fio', 'phone_number', 'email']
     list_max_show_all = 10
     ordering = ["-created_time"]
+
+
+@admin.register(CategoryEquipment)
+class CategoryEquipmentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title']

@@ -6,6 +6,13 @@ class CategoryEquipment(models.Model):
     title = models.CharField(verbose_name='Название категории',
                              max_length=255, blank=False, null=False)
 
+    class Meta:
+        verbose_name = 'Категории'
+        verbose_name_plural = 'Категория'
+
+    def __str__(self):
+        return self.title
+
 
 class Equipment(models.Model):
     photo = models.ImageField(upload_to='equipment/photo',

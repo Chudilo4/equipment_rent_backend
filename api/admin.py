@@ -1,24 +1,15 @@
 from django.contrib import admin
 
-from api.models import Camera, Feedback, Coder, Music, Light
+from api.models import Equipment, Feedback, Category
 
 
-@admin.register(Camera)
-class CameraAdmin(admin.ModelAdmin):
+@admin.register(Equipment)
+class FeedbackAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Coder)
-class CoderAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(Light)
-class LightAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Music)
-class MusicAdmin(admin.ModelAdmin):
+@admin.register(Category)
+class FeedbackAdmin(admin.ModelAdmin):
     pass
 
 

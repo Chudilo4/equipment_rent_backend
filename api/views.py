@@ -2,9 +2,9 @@ import os
 
 from rest_framework import status
 from rest_framework.views import APIView
-from api.models import Camera, Coder, Light, Music
-from api.serializers import CameraSerializer, FeedbackSerializer, CoderSerializer, MusicSerializer, LightSerializer
-
+from api.models import Equipment, Category
+from api.serializers import EquipmentSerializer, FeedbackSerializer
+from django.db.models import Q
 from rest_framework.response import Response
 import requests
 from dotenv import load_dotenv
@@ -13,35 +13,15 @@ load_dotenv('.env')
 
 
 # Create your views here.
-class CameraAPIView(APIView):
+class SearchEqAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
-        equipment = Camera.objects.all()
-        serializer = CameraSerializer(instance=equipment, many=True, context={'request': request})
-        return Response(serializer.data, status.HTTP_200_OK)
-
-
-class MusicAPIView(APIView):
-
-    def get(self, request, *args, **kwargs):
-        equipment = Music.objects.all()
-        serializer = MusicSerializer(instance=equipment, many=True, context={'request': request})
-        return Response(serializer.data, status.HTTP_200_OK)
-
-
-class LightAPIView(APIView):
-
-    def get(self, request, *args, **kwargs):
-        equipment = Light.objects.all()
-        serializer = LightSerializer(instance=equipment, many=True, context={'request': request})
-        return Response(serializer.data, status.HTTP_200_OK)
-
-
-class CoderAPIView(APIView):
-
-    def get(self, request, *args, **kwargs):
-        equipment = Coder.objects.all()
-        serializer = CoderSerializer(instance=equipment, many=True, context={'request': request})
+        query = self.request.GET.get("q")
+        try:
+            equipment = Category.objects.get(title=query).equipments.all()
+        except Category.DoesNotExist:
+            return Response({'Такой категории нет'}, status.HTTP_400_BAD_REQUEST)
+        serializer = EquipmentSerializer(instance=equipment, many=True, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
 

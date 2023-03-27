@@ -1,29 +1,11 @@
 from rest_framework import serializers
 
-from api.models import Camera, Coder, Music, Feedback, Light
+from api.models import Feedback, Equipment
 
 
-class CameraSerializer(serializers.ModelSerializer):
+class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Camera
-        fields = ['photo', 'title', 'description', 'quantity', 'price']
-
-
-class CoderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Coder
-        fields = ['photo', 'title', 'description', 'quantity', 'price']
-
-
-class MusicSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Music
-        fields = ['photo', 'title', 'description', 'quantity', 'price']
-
-
-class LightSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Light
+        model = Equipment
         fields = ['photo', 'title', 'description', 'quantity', 'price']
 
 

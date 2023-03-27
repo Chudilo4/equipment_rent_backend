@@ -2,6 +2,11 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 
+class CategoryEquipment(models.Model):
+    title = models.CharField(verbose_name='Название категории',
+                             max_length=255, blank=False, null=False)
+
+
 class Equipment(models.Model):
     photo = models.ImageField(upload_to='equipment/photo',
                               blank=False, verbose_name='Фото оборудования')
@@ -15,6 +20,8 @@ class Equipment(models.Model):
     price = models.IntegerField(verbose_name='Цена за смену',
                                 validators=[MinValueValidator(1)],
                                 default=1, blank=False, null=False)
+    category = models.ForeignKey(CategoryEquipment, verbose_name='Категория',
+                                 on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_now_add=True,
                                         verbose_name='Время создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Время обновления')

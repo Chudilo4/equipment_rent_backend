@@ -2,8 +2,8 @@ import os
 
 from rest_framework import status
 from rest_framework.views import APIView
-from api.models import CategoryEquipment
-from api.serializers import EquipmentSerializer, FeedbackSerializer, CategorySerializer
+from api.models import Camera, Coder, Light, Music
+from api.serializers import CameraSerializer, FeedbackSerializer, CoderSerializer, MusicSerializer, LightSerializer
 
 from rest_framework.response import Response
 import requests
@@ -13,11 +13,35 @@ load_dotenv('.env')
 
 
 # Create your views here.
-class EquipmentAPIView(APIView):
+class CameraAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
-        equipment = CategoryEquipment.objects.prefetch_related('equipment_set').all()
-        serializer = CategorySerializer(instance=equipment, many=True, context={'request': request})
+        equipment = Camera.objects.all()
+        serializer = CameraSerializer(instance=equipment, many=True, context={'request': request})
+        return Response(serializer.data, status.HTTP_200_OK)
+
+
+class MusicAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        equipment = Music.objects.all()
+        serializer = MusicSerializer(instance=equipment, many=True, context={'request': request})
+        return Response(serializer.data, status.HTTP_200_OK)
+
+
+class LightAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        equipment = Light.objects.all()
+        serializer = LightSerializer(instance=equipment, many=True, context={'request': request})
+        return Response(serializer.data, status.HTTP_200_OK)
+
+
+class CoderAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        equipment = Coder.objects.all()
+        serializer = CoderSerializer(instance=equipment, many=True, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
 

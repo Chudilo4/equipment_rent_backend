@@ -1,11 +1,29 @@
 from rest_framework import serializers
 
-from api.models import Equipment, Feedback, CategoryEquipment
+from api.models import Camera, Coder, Music, Feedback, Light
 
 
-class EquipmentSerializer(serializers.ModelSerializer):
+class CameraSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Equipment
+        model = Camera
+        fields = ['photo', 'title', 'description', 'quantity', 'price']
+
+
+class CoderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coder
+        fields = ['photo', 'title', 'description', 'quantity', 'price']
+
+
+class MusicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Music
+        fields = ['photo', 'title', 'description', 'quantity', 'price']
+
+
+class LightSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Light
         fields = ['photo', 'title', 'description', 'quantity', 'price']
 
 
@@ -19,10 +37,3 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         fields = ['fio', 'phone_number', 'email', 'text']
 
-
-class CategorySerializer(serializers.ModelSerializer):
-    equipment_set = EquipmentSerializer(many=True)
-
-    class Meta:
-        model = CategoryEquipment
-        fields = ['id', 'title', 'equipment_set']

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Equipment, Feedback
+from api.models import Equipment, Feedback, CategoryEquipment
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
@@ -19,3 +19,9 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         fields = ['fio', 'phone_number', 'email', 'text']
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    equipment_set = EquipmentSerializer(many=True)
+    class Meta:
+        model = CategoryEquipment
+        fields = ['id', 'title', 'equipment_set']

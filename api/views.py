@@ -2,8 +2,9 @@ import os
 
 from rest_framework import status
 from rest_framework.views import APIView
-from api.models import Equipment
-from api.serializers import EquipmentSerializer, FeedbackSerializer
+from api.models import CategoryEquipment
+from api.serializers import EquipmentSerializer, FeedbackSerializer, CategorySerializer
+
 from rest_framework.response import Response
 import requests
 from dotenv import load_dotenv
@@ -15,8 +16,8 @@ load_dotenv('.env')
 class EquipmentAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
-        equipment = Equipment.objects.all()
-        serializer = EquipmentSerializer(instance=equipment, many=True, context={'request': request})
+        equipment = CategoryEquipment.objects.prefetch_related('equipment_set').all()
+        serializer = CategorySerializer(instance=equipment, many=True, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
 

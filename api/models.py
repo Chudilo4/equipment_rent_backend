@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, FileExtensionValidator
 from django.db import models
 
 
@@ -14,8 +14,9 @@ class Category(models.Model):
 
 
 class Equipment(models.Model):
-    photo = models.ImageField(upload_to='equipment/photo',
-                              blank=False, verbose_name='Фото оборудования')
+    photo = models.FileField(upload_to='equipment/photo',
+                             validators=[FileExtensionValidator(['png', 'jpeg', 'svg'])],
+                             blank=False, verbose_name='Фото оборудования')
     title = models.CharField(max_length=255, blank=False,
                              null=False, verbose_name='Название оборудования')
     description = models.CharField(null=False, blank=False,

@@ -4,12 +4,12 @@ from api.models import Equipment, Feedback, Category
 
 
 @admin.register(Equipment)
-class FeedbackAdmin(admin.ModelAdmin):
+class EquipmentAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Category)
-class FeedbackAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     pass
 
 

@@ -18,4 +18,3 @@ class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = ['fio', 'phone_number', 'email', 'text']
-

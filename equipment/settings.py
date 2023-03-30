@@ -28,17 +28,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG'))
 
-ALLOWED_HOSTS = ["*",
-                 "127.0.0.1"]
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
-CORS_ALLOW_ALL_ORIGINS = bool(os.getenv('CORS_ALLOW_ALL_ORIGINS'))
+# CORS_ALLOW_ALL_ORIGINS = bool(os.getenv('CORS_ALLOW_ALL_ORIGINS'))
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://example.com",
-#     "https://sub.example.com",
-#     "http://localhost:8080",
-#     "http://127.0.0.1:9000",
-# ]
+# CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS')]
 
 
 # Application definition

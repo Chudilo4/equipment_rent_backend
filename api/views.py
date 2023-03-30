@@ -14,7 +14,7 @@ load_dotenv('.env')
 logger = logging.getLogger(__name__)
 
 
-class SearchEqAPIView(APIView):
+class SearchEquipmentAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get("q")

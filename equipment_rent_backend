@@ -1,0 +1,28 @@
+server {
+    listen 80;
+    server_name equipment_rent_backend.loc;
+    add_header Access-Control-Allow-Origin *;
+
+    location /admin {
+        proxy_pass http://127.0.0.1:8009;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+    location /api/v1 {
+        proxy_pass http://127.0.0.1:8009;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+    location /static {
+        root /home/твой путь до проекта/equipment_rent_backend;
+    }
+    location /media {
+        root /home/твой путь до проекта/equipment_rent_backend;
+    }
+    location /static {
+        root /home/твой путь до проекта фронтэнд/site;
+        html index.html
+    }
+}

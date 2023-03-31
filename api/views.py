@@ -1,16 +1,14 @@
 import logging
-import os
 
-import requests
-from dotenv import load_dotenv
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.models import Category
-from api.serializers import EquipmentSerializer, FeedbackSerializer
+from api.serializers import EquipmentSerializer, FeedbackSerializer, EquipmentRentSerializer
+from service.telegram import send_telegram
 
-load_dotenv('.env')
 logger = logging.getLogger(__name__)
 
 
@@ -34,15 +32,20 @@ class FeedbackAPIView(APIView):
         serializer = FeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            token = os.getenv('BOT_TOKEN')
-            method = 'sendMessage'
-            text = 'Вам пришла заявка\n' \
-                   f'От кого : {serializer.data["fio"]}\n' \
-                   f'Телефонный номер: {serializer.data["phone_number"]}\n' \
-                   f'EMAIL : {serializer.data["email"]}\n' \
-                   f'ЧТО хочет : {serializer.data["text"]}\n'
-            requests.post('https://api.telegram.org/bot{0}/{1}'.format(token, method),
-                          data={'chat_id': os.getenv('CHAT_ID'), 'text': text}).json()
+            serializer.data.get('email')
+            send_telegram(serializer)
+            logger.info(f"{request.META['REMOTE_ADDR']} создал заявку")
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+class EquipmentRentAPIView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        serializer = EquipmentRentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            send_telegram(serializer)
             logger.info(f"{request.META['REMOTE_ADDR']} создал заявку")
             return Response(serializer.data, status.HTTP_201_CREATED)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
